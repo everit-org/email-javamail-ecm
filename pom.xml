@@ -81,6 +81,7 @@
           <instructions>
             <Export-Package>
               org.everit.email.javamail.ecm;version="1.0.0",
+              org.everit.email.javamail.ecm.sender;version="1.0.0"
             </Export-Package>
           </instructions>
         </configuration>
