@@ -25,11 +25,15 @@ public final class JavamailEmailSenderComponentConstants {
    */
   public static final class References {
 
+    public static final String SERVICE_REF_ENHANCERS = "enhancers";
+
     public static final String SERVICE_REF_SESSION = "session";
 
     private References() {
     }
   }
+
+  public static final String ATTR_ENHANCERS_TARGET = References.SERVICE_REF_ENHANCERS + ".target";
 
   public static final String ATTR_SESSION_TARGET = References.SERVICE_REF_SESSION + ".target";
 
