@@ -28,7 +28,7 @@
 
   <groupId>org.everit.email</groupId>
   <artifactId>org.everit.email.javamail.ecm</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>1.1.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <name>Everit - Email JSR 919 (JavaMail) ECM</name>
