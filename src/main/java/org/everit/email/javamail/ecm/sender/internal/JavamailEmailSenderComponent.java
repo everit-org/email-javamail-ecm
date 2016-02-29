@@ -15,13 +15,17 @@
  */
 package org.everit.email.javamail.ecm.sender.internal;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.List;
 
 import javax.mail.Session;
 
 import org.everit.email.javamail.ecm.sender.JavamailEmailSenderComponentConstants;
 import org.everit.email.javamail.sender.JavaMailEmailSender;
+import org.everit.email.javamail.sender.JavaMailMessageEnhancer;
 import org.everit.email.sender.EmailSender;
 import org.everit.osgi.ecm.annotation.Activate;
 import org.everit.osgi.ecm.annotation.Component;
@@ -29,6 +33,7 @@ import org.everit.osgi.ecm.annotation.ConfigurationPolicy;
 import org.everit.osgi.ecm.annotation.Deactivate;
 import org.everit.osgi.ecm.annotation.ManualService;
 import org.everit.osgi.ecm.annotation.ServiceRef;
+import org.everit.osgi.ecm.annotation.ThreeStateBoolean;
 import org.everit.osgi.ecm.component.ComponentContext;
 import org.everit.osgi.ecm.extender.ECMExtenderConstants;
 import org.osgi.framework.ServiceRegistration;
@@ -47,6 +52,8 @@ import aQute.bnd.annotation.headers.ProvideCapability;
 @ManualService({ EmailSender.class })
 public class JavamailEmailSenderComponent {
 
+  private List<JavaMailMessageEnhancer> enhancers = Collections.emptyList();
+
   private ServiceRegistration<EmailSender> serviceRegistration;
 
   private Session session;
@@ -59,7 +66,7 @@ public class JavamailEmailSenderComponent {
    */
   @Activate
   public void activate(final ComponentContext<JavamailEmailSenderComponent> componentContext) {
-    EmailSender emailSender = new JavaMailEmailSender(session);
+    EmailSender emailSender = new JavaMailEmailSender(session, enhancers);
 
     Dictionary<String, Object> properties = new Hashtable<>(componentContext.getProperties());
     serviceRegistration =
@@ -69,6 +76,20 @@ public class JavamailEmailSenderComponent {
   @Deactivate
   public void deactivate() {
     serviceRegistration.unregister();
+  }
+
+  /**
+   * Sets enhancers.
+   */
+  @ServiceRef(attributeId = JavamailEmailSenderComponentConstants.ATTR_ENHANCERS_TARGET,
+      referenceId = JavamailEmailSenderComponentConstants.References.SERVICE_REF_ENHANCERS,
+      optional = true, multiple = ThreeStateBoolean.TRUE, label = "Enhancers",
+      description = "Java Mail Message Enhancers that are used to enhance "
+          + "javax.mail.internet.MimeMessage.")
+  public void setEnhancers(final JavaMailMessageEnhancer[] enhancers) {
+    if ((enhancers != null) && (enhancers.length > 0)) {
+      this.enhancers = Arrays.asList(enhancers);
+    }
   }
 
   @ServiceRef(referenceId = JavamailEmailSenderComponentConstants.References.SERVICE_REF_SESSION,
