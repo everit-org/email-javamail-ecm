@@ -89,6 +89,8 @@ public class JavamailEmailSenderComponent {
   public void setEnhancers(final JavaMailMessageEnhancer[] enhancers) {
     if ((enhancers != null) && (enhancers.length > 0)) {
       this.enhancers = Arrays.asList(enhancers);
+    } else {
+      this.enhancers = Collections.emptyList();
     }
   }
 
