@@ -32,13 +32,11 @@ import org.everit.osgi.ecm.annotation.Component;
 import org.everit.osgi.ecm.annotation.ConfigurationPolicy;
 import org.everit.osgi.ecm.annotation.Deactivate;
 import org.everit.osgi.ecm.annotation.ManualService;
+import org.everit.osgi.ecm.annotation.ManualServices;
 import org.everit.osgi.ecm.annotation.ServiceRef;
 import org.everit.osgi.ecm.annotation.ThreeStateBoolean;
 import org.everit.osgi.ecm.component.ComponentContext;
-import org.everit.osgi.ecm.extender.ECMExtenderConstants;
 import org.osgi.framework.ServiceRegistration;
-
-import aQute.bnd.annotation.headers.ProvideCapability;
 
 /**
  * ECM component that wraps a {@link JavaMailEmailSender} and registers it as an OSGi service.
@@ -47,9 +45,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit JavaMail Email Sender",
     description = "JSR 919 implementation of Everit Email Sender")
-@ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
-    value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "" + "=${@class}")
-@ManualService({ EmailSender.class })
+@ManualServices(@ManualService({ EmailSender.class }))
 public class JavamailEmailSenderComponent {
 
   private List<JavaMailMessageEnhancer> enhancers = Collections.emptyList();

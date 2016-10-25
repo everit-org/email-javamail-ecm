@@ -30,14 +30,12 @@ import org.everit.osgi.ecm.annotation.Component;
 import org.everit.osgi.ecm.annotation.ConfigurationPolicy;
 import org.everit.osgi.ecm.annotation.Deactivate;
 import org.everit.osgi.ecm.annotation.ManualService;
+import org.everit.osgi.ecm.annotation.ManualServices;
 import org.everit.osgi.ecm.annotation.ServiceRef;
 import org.everit.osgi.ecm.annotation.attribute.StringAttribute;
 import org.everit.osgi.ecm.component.ComponentContext;
 import org.everit.osgi.ecm.component.ConfigurationException;
-import org.everit.osgi.ecm.extender.ECMExtenderConstants;
 import org.osgi.framework.ServiceRegistration;
-
-import aQute.bnd.annotation.headers.ProvideCapability;
 
 /**
  * ECM Component that registers a {@link Session} as an OSGi service based on the configuration of
@@ -47,9 +45,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit JavaMail Email Session",
     description = "Component that registers a configured JSR 919 Session")
-@ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
-    value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "" + "=${@class}")
-@ManualService({ Session.class })
+@ManualServices(@ManualService({ Session.class }))
 public final class JavamailSessionComponent {
 
   private Authenticator authenticator;

@@ -27,14 +27,12 @@ import org.everit.osgi.ecm.annotation.Component;
 import org.everit.osgi.ecm.annotation.ConfigurationPolicy;
 import org.everit.osgi.ecm.annotation.Deactivate;
 import org.everit.osgi.ecm.annotation.ManualService;
+import org.everit.osgi.ecm.annotation.ManualServices;
 import org.everit.osgi.ecm.annotation.Update;
 import org.everit.osgi.ecm.annotation.attribute.PasswordAttribute;
 import org.everit.osgi.ecm.annotation.attribute.StringAttribute;
 import org.everit.osgi.ecm.component.ComponentContext;
-import org.everit.osgi.ecm.extender.ECMExtenderConstants;
 import org.osgi.framework.ServiceRegistration;
-
-import aQute.bnd.annotation.headers.ProvideCapability;
 
 /**
  * Java Mail Password Authenticator Component.
@@ -44,9 +42,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
     label = "Everit JavaMail Password Authenticator",
     description = "Registers an Authenticator as OSGi service that uses the configured username"
         + "-password pair for authentication.")
-@ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
-    value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "" + "=${@class}")
-@ManualService({ Authenticator.class })
+@ManualServices(@ManualService({ Authenticator.class }))
 public class JavamailPasswordAuthenticatorComponent {
 
   private String password;
