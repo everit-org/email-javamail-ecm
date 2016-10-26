@@ -32,11 +32,13 @@ import org.everit.osgi.ecm.annotation.Update;
 import org.everit.osgi.ecm.annotation.attribute.PasswordAttribute;
 import org.everit.osgi.ecm.annotation.attribute.StringAttribute;
 import org.everit.osgi.ecm.component.ComponentContext;
+import org.everit.osgi.ecm.extender.ExtendComponent;
 import org.osgi.framework.ServiceRegistration;
 
 /**
  * Java Mail Password Authenticator Component.
  */
+@ExtendComponent
 @Component(componentId = JavamailPasswordAuthenticatorComponentConstants.SERVICE_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit JavaMail Password Authenticator",

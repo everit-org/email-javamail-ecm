@@ -35,12 +35,14 @@ import org.everit.osgi.ecm.annotation.ServiceRef;
 import org.everit.osgi.ecm.annotation.attribute.StringAttribute;
 import org.everit.osgi.ecm.component.ComponentContext;
 import org.everit.osgi.ecm.component.ConfigurationException;
+import org.everit.osgi.ecm.extender.ExtendComponent;
 import org.osgi.framework.ServiceRegistration;
 
 /**
  * ECM Component that registers a {@link Session} as an OSGi service based on the configuration of
  * the component.
  */
+@ExtendComponent
 @Component(componentId = JavamailSessionComponentConstants.SERVICE_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit JavaMail Email Session",

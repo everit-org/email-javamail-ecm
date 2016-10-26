@@ -36,11 +36,13 @@ import org.everit.osgi.ecm.annotation.ManualServices;
 import org.everit.osgi.ecm.annotation.ServiceRef;
 import org.everit.osgi.ecm.annotation.ThreeStateBoolean;
 import org.everit.osgi.ecm.component.ComponentContext;
+import org.everit.osgi.ecm.extender.ExtendComponent;
 import org.osgi.framework.ServiceRegistration;
 
 /**
  * ECM component that wraps a {@link JavaMailEmailSender} and registers it as an OSGi service.
  */
+@ExtendComponent
 @Component(componentId = JavamailEmailSenderComponentConstants.SERVICE_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit JavaMail Email Sender",
